@@ -1,17 +1,20 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import { Link } from 'gatsby';
 
 export default ({ data }) => {
   return (
-    <div>
+    <>
       <h1>Blog</h1>
       {data.allWordpressPost.edges.map(({ node }) => (
-        <div>
-          <p>{node.title}</p>
+        <article key={node.id}>
+          <p>
+            <Link to={`blog/${node.slug}`}>{node.title}</Link>
+          </p>
           <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-        </div>
+        </article>
       ))}
-    </div>
+    </>
   );
 };
 
@@ -20,6 +23,7 @@ export const pageQuery = graphql`
     allWordpressPost(sort: { fields: [date], order: DESC }) {
       edges {
         node {
+          id
           title
           excerpt
           slug
