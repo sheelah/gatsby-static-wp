@@ -43,9 +43,9 @@ module.exports = {
         excludedRoutes: [],
         // use a custom normalizer which is applied after the built-in ones.
         normalizer: function({ entities }) {
-          return entities
+          return entities;
         },
       },
     },
   ],
-}
+};

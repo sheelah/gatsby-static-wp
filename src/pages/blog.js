@@ -1,5 +1,5 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 
 export default ({ data }) => {
   return (
@@ -12,8 +12,8 @@ export default ({ data }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 export const pageQuery = graphql`
   query {
@@ -27,4 +27,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
