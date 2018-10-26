@@ -3,7 +3,7 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
-
+const createPaginatedPages = require('gatsby-paginate');
 const _ = require(`lodash`);
 const Promise = require(`bluebird`);
 const path = require(`path`);
@@ -23,6 +23,8 @@ exports.createPages = ({ graphql, actions }) => {
                 status
                 template
                 format
+                excerpt
+                title
               }
             }
           }
@@ -33,7 +35,16 @@ exports.createPages = ({ graphql, actions }) => {
         console.log(result.errors);
         reject(result.errors);
       }
-      const postTemplate = path.resolve(`./src/templates/post.js`);
+      createPaginatedPages({
+        edges: result.data.allWordpressPost.edges,
+        createPage: createPage,
+        pageTemplate: 'src/templates/blog-index.js',
+        pageLength: 5,
+        pathPrefix: 'blog',
+        buildPath: (index, pathPrefix) =>
+          index > 1 ? `${pathPrefix}/${index}` : `/${pathPrefix}`, // This is optional and this is the default
+      });
+      const postTemplate = path.resolve('./src/templates/post.js');
       _.each(result.data.allWordpressPost.edges, edge => {
         createPage({
           path: `blog/${edge.node.slug}`,
