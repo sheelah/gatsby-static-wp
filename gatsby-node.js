@@ -4,10 +4,10 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 const createPaginatedPages = require('gatsby-paginate');
-const _ = require(`lodash`);
-const Promise = require(`bluebird`);
-const path = require(`path`);
-const slash = require(`slash`);
+const forEach = require('lodash.foreach');
+const Promise = require('bluebird');
+const path = require('path');
+const slash = require('slash');
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -45,7 +45,7 @@ exports.createPages = ({ graphql, actions }) => {
           index > 1 ? `${pathPrefix}/${index}` : `/${pathPrefix}`, // This is optional and this is the default
       });
       const postTemplate = path.resolve('./src/templates/post.js');
-      _.each(result.data.allWordpressPost.edges, edge => {
+      forEach(result.data.allWordpressPost.edges, edge => {
         createPage({
           path: `blog/${edge.node.slug}`,
           component: slash(postTemplate),
