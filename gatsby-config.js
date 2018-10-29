@@ -1,3 +1,5 @@
+require('dotenv-safe').config();
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Default Starter',
