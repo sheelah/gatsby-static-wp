@@ -22,7 +22,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-wordpress',
       options: {
-        baseUrl: 'sheelahb.com',
+        baseUrl: process.env.WP_BASE_URL,
         protocol: 'https',
         hostingWPCOM: false,
         useACF: false,
